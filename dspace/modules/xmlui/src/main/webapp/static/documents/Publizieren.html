@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>res doctae - Dokumentation</title>
+<style type="text/css">
+body {
+	padding: 0.5em 2em;
+}
+h1 {
+	font-size: 1.4em;
+	
+}
+h2 {
+	font-size: 1.2em;
+}
+h3 {
+	font-size: 1.0em;
+}
+.bold {
+	font-weight: bolder;
+}
+
+.notes {
+	color: #006400;
+}
+
+li {
+	padding: 0.3em 0;
+}
+</style>
+</head>
+<body>
+	<h1>Publizieren auf res doctae</h1>
+	<h2 id="content">Inhalt</h2>
+<div>
+	<ol>
+			<li><a href="#register">Rechte fürs Publizieren erwerben</a></li>
+			<li><a href="#embargo">Embargo-Management</a></li>
+			<li><a href="#epubli">Einbindung des "print on demand" Services zu einer Publikation</a></li>
+			<li><a href="#publicationworkflow">Publikationsprozess</a></li>
+			<li><a href="#metadatainfo">Allgemeine Regeln beim Erfassen von Metadaten</a></li>
+			<li><a href="#newcoll">Neue Sammlung anlegen</a></li>
+			<li><a href="#specialmetadata">Erklärungen zu einzelnen Metadatenfeldern</a></li>
+			<li><a href="#form2dc">Zuordnung von Formular- und internen dc-Feldern</a></li>
+			
+	</ol>
+</div>
+<div>
+
+<h2 id="register">Ein neuer Nutzer kann durch die folgenden Schritte Rechte fürs Publizieren erwerben:</h2>
+<div>
+<ol>
+<li>Die Adresse für die erstmalige Registrierung (<a href="http://rep.adw-goe.de/register">http://rep.adw-goe.de/register</a>) vom Admin Thomas Bode per E-Mail erfragen.</li>
+<li>Mit der nun bekannten Adresse sich registrieren und die Registrierung über den - per E-Mail zugesandten Link - bestätigen. Th. Bode bekommt daraufhin eine E-Mail-Benachrichtigung, dass sich der neue Nutzer registriert hat.<br/><br />
+<span class="notes">Zu diesem Zeitpunkt kann sich der neue Nutzer zwar beim res doctae anmelden, hat aber noch nicht die Rechte zum Publizieren.</span></li>
+<li>Th.Bode kann dann den neuen Nutzer entweder<br/>
+a) in die Gruppe "Submitters" eintragen<br />
+oder<br />
+b) in die SUBMIT-Gruppen dezidierter Sammlungen eintragen.<br/><br />
+<span class="notes">Im Falle a) kann der Nutzer in allen Sammlungen publizieren, im Falle b) nur in den ausgewählten Sammlungen, deren SUBMIT-Gruppen er angehört.</span></li>
+</ol>
+</div>
+
+
+<h2 id="embargo">Embargomanagement</h2>
+<div>
+Dokumente, die unter Embargo gestellt sind, können von Nicht-Administratoren weder gelesen noch heruntergeladen werden. Ein Embargo impliziert immer ein Ablaufdatum. Das System prüft jeden Tag, ob das Embargo-Ablaufdatum eines Dokumentes abgelaufen ist und gibt ggf. das Dokument automatisch frei. Danach  ist das Dokument für alle Nutzer lesbar und herunterladbar.<br />
+Intern wird ein Embargo folgenderweise realisiert:<br>
+<ul>
+	<li>Das Embargoenddatum wird einmal im Feld "<b>dc.description.embaroed</b>" und noch einmal im Feld "<b>dc.date.embargoed</b>" gespeichert.<br >
+	Zur täglichen Prüfung des Ablaufdatums nutzt das System das Feld dc.date.embargoed. Ist das Embargo abgelaufen, so wird mit der Freigabe des Dokumentes dieses Feld gelöscht.<br />
+	Das Feld dc.description.embaroed wird für die Anzeige (zusammen mit einem entsprechenden Text) auf der Nutzeroberfläche verwendet. Nach Ablauf des Embargoes bleibt das Feld für Protokollzwecke weiterhin erhalten, wird aber den Nutzern nicht mehr angezeigt.<br />
+	</li>
+	<li>Die Leserechte auf das Dokument werden nur für "Administrator" vergeben. (Bei frei zugänglichen Dokumenten sind die Leserechte auf "Anonymus" gesetzt. D.h. jeder ist berechtigt das Dokument zu lesen.)</li>
+</ul>
+
+<h3>Dokumente zur Publikationszeit unter Embargo stellen</h3>
+Im Metadatenformular beim Publikations- und beim editorial Workflow ist ein Feld "Embargodatum" vorgesehen. Wird hier ein Datum vom Publizierenden bzw. später vom Redakteur eingetragen, so werden alle Dokumente, die zur Publikation gehören bis zum angegebenem Datum (einschließlich) unter Embargo gestellt. Um alles weitere kümmert sich das System.<br />
+D.h. Beim wegschicken des Formulars wird das Embargodatum im Feld "dc.description.embaroed" gespeichert.<br />
+Beim Freischalten der Publikation durch den Redakteur wird das Embargodatum vom System zusätzlich im Feld "dc.date.embaroed" geschrieben und die Leserechte der zugehörigen Dokumente automatisch auf Administratoren eingeschränkt.<br />
+Nach Ablauf des Datums gibt das System die Leserechte für alle frei und löscht das Feld dc.date.embargoed.
+
+<h3>Bereits freigegebene Dokumente nachträglich unter Embargo stellen</h3>
+
+
+<ol>
+	Wenn das Embargo nicht beim Publikationsprozess unter Embargo gestellt wurde, müssen die folgenden Schritte ausgeführt werden:
+	<li>Leserechte des Dokumentes auf "Adminstrator" setzen.
+		<ul>
+			<li>Sich als Administrator anmelden</li>
+			<li>Zur Publikation navigieren, die unter Embargo gestellt werden soll.</li>
+			<li>Im linken Menü "Dokument bearbeiten" wählen.</li>
+			<li>In der Karte "Dokumentenstatus" (1. Reiter) "Rechte bearbeiten" auswählen.</li>
+			<li>Unter "Rechte des Bündesls ORIGINAL" die PDF (oder sontige) Datei suchen, die nicht für alle lesbar sein soll. Unter dem Namen der Datei auf "READ" klicken.</li>
+			<li>Auf der erscheinenden Seite in der Dropdown-Menü die Gruppe "Administrator" auswählen.</li>
+			<li>Auf "speichern" klicken.</li>
+			<li>Dies führt zurück zur Rechte Bearbeitungs-Seiten. Hier auf "zurück" klicken.</li>
+		</ul>
+	</li>
+		
+	<li>Datum für das automatische Behandlung und für die Anzeige setzen.
+		<ul>
+			<li>Reiter "Metadaten" auswählen.</li>
+			<li>im Dropdown-Menü oben dc.date.embargoed auswählen und ins Feld "Wert" darunter das Embargoenddatum eintragan. [YYYY-MM-DD]</li>
+			<li>Auf "Metadatum hinzufügen" klicken.</li>
+			<li>Die letzten 2 Schritte mit dc.description.embargoed aus dem Dropdown wiederholen.</li>
+			<li>Auf "zurück" klicken.</li>
+			<li>Fertig</li>
+		</ul>
+	</li>
+</ol>
+Nach dem Ausloggen aus dem System soll auf der Seite der Publikation ein Text mit dem Embargodatum erscheinen und die "Öffnen" bzw. "Herunterladen" Knöpfe verschwinden.
+</div>
+
+<h2 id="epubli">Einbindung des "print on demand" Services zu einer Publikation</h2>
+<div>
+	Ist unter den Metadaten einer Publikation das Feld dc.notes.intern mit dem Inhalt "printondemand" vorhanden, so wird bei der Anzeige des Dokumentes ein Link zum ePubli-Service angezeigt.
+	
+	Z.Z. gilt es nur für Publikationen, die nur ein Dokument enthalten.<br /><br />
+	Dieses Feld kann auf folgende Weisen erzeugt werden:
+	<ol>
+		<li>Im Editorial Workflow wird das Feld beim bearbeiten der Metadaten angeboten.</li>
+		<li>Ist eine Publikation schon freigegeben, so kann man (als angemeldeter Nutzer mit den nötigen Rechten) die Publikation bearbeiten und dabei das Feld mit dem betr. Inhalt zu den Metadaten hinzufügen.</li>
+		<li>Sollen in einer best. Sammlung alle Publikationen mit dem Druckdienst versehen werden, so kann man (als angemeldeter Nutzer mit den nötigen Rechten) die Sammlung bearbeiten und in der Metadatenschablone dc.notes.intern mit "printondemand" einfügen. Dann wird dieses Feld allen Publikationen, die zukünftig in dieser Sammlung erzeugt werden, automtisch hinzugefügt. Schon vorhandene Puplikationen sind davon nicht betroffen. Diese müssen händisch auf dem Weg 2 ergänzt werdeni!<br /><br />
+		Bis jetzt ist das Feld in der Metadatenschablone der Sammlungen "Philologisch-Historische Klasse" und "Mathematisch-Physikalische Klasse" vorhanden.</li>
+	</ol>
+
+</div>
+<h2 id="publicationworkflow">Publikationsprozess:</h2>
+<div>
+<ol>
+
+<li>Der Publizierende wählt die entsprechende Sammlung aus, durchläuft den Publikationsworkflow und schliesst den Prozess ab. <br />
+Die neueingestellte Publikation ist dann für die Öffentlichkeit noch nicht sichtbar. Sie landet im Bearbeitungspool der Editoren, die per E-Mail benachrichtigt werden, dass eine neue Publikation auf Bearbeitung wartet.</li>
+<li>Alle angemeldeten Mitglieder der Gruppe "Editors" sehen unter "Veröffentlichungen" den Bearbeitungspool. Damit es klar wird, wer die Publkation bearbeiet, muss ein Edior die Publikation per Checkbox auswählen und "Übernahme zur Bearbeitung" klicken. Dadurch wird die Publikation in den Bereich "Ihre eigene Aufgaben" verschoben.</li>
+<li>Durch einen Klick auf "Die Veröffentlichung wird bearbeitet", hat dann der Editor die Möglichkeit<br />
+a) die Metadaten der Publikation zu bearbeiten<br />
+b) die Publikation abzulehnen <br />
+oder <br />
+c) die Publikation zu akzeptieren.<br /><br />
+<span class="notes">Unter a) erscheint dem Editor ein - für den normalen Nutzer nicht sichtbares - Feld "Rechte", wo er zusätzliche Bemerkungen zur Lizenzierung der Publikation einfügen kann.<br />
+Im Falle b) kann und sollte der Editor eine Begründung für die Ablehnung angeben, die dem Publizierenden per E-Mail zugeschickt wird.<br/>
+Hat ein Editor die Publikation akzeptiert, wird das Dokument öffentlich sichtbar. Auch darüber wird der Publizierende per E-Mail informiert.</span>
+</li>
+
+</ol>
+</div>
+
+<h2 id="newcoll">Neue Sammlung erstellen</h2>
+<div>
+Erstellt ein Administrator eine neue Sammlung in einem Bereich, so muss dieser Sammlung ein passendes Metdatenformular zugeordnet werden. Die Metadaten, die die Dokumente einer neuen Sammlung am besten beschreiben, sollten unbedingt noch vor dem hochladen von Dokumenten über- und  festgelegt werden. Sonst passen die beschreibenden Daten, die Sie beim Publizieren in der Sammlung angeben, nicht zu den Dokumententypen der Sammlung. Damit entfällt die nachträgliche aufwendige Korrektur von Publikationsdaten von vielen Dokumenten!<br /> 
+<br />
+<span class="notes">Die Zurordnung von Formularen zu neuen Sammlungen kann nicht auf der Weboberfläche vorgenommen werden. Ist das Metadetenset einer Sammlung festgelegt, wenden Sie sich bitte an den Hauptadministrator des Dokumentenservers!</span></li>
+<br />
+Das DINI-Zertifikat fordert für die OAI-Schnittstelle die Auszeichnung der Publikationen mit DDC-Klassen. DDC-Klassen sind pro Sammlung vergeben und müssen in das Metadatenschablone der Sammlung eingetragen werden. So wird automatisch jeder Publikation, die in der betr. Sammlung erscheint, die gegebene DDC-Klasse vergeben.<br />
+Es ist oft nützlich auch sonstige Metadaten in die Schablone der Sammlung einzutragen. (z.B. Herausgeber, wenn alle Publikationen in der Sammlung von demselben Herausgeber stammen). 
+</div>
+
+<h2 id="metadatainfo">Allgemeine Regel beim Erfassen von Metadaten</h2>
+<div>
+<ol>
+<li><b>Grundprinzip</b><br /><br />
+Die bibliliographische Daten, die eine Publikation beschreiben, und ihre Darstellung in res doctae streng voneinander getrennt. Nur so ist sichergestellt, dass die Metadaten in den verschiedenen Schnittstellen korrekt ausgeliefert werden und ihre Darstellung auf der Nutzeroberfläche den jeweiligen Bedürfnissen angepasst werden kann. Geben Sie bitte in die einzelne Felder der Metadatenformulare genau das ein, was die Beschreibung des jeweiligen Feldes verlangt. Insbesondere sollen keine komplexen Daten, wie der gesamte Text eines Deckblattes in ein Feld unstrukturiert eingegeben werden! Ebenfalls dürchen  z.B. Herausgeber nicht in das Autorenfeld mit Kennzeichnung "(Hrsg.)", sondern müssen in das Herausgeberfeld eingetragen werden. Sind die alle bibliographischen Daten in getrennten Feldern gespreichert, kann ihre Anzeige in den Trefferlisten, Publikationsseiten usw. auf Wunsch durch den Systembetreuer ergänzt oder verändert werden. <br/>
+
+ </li>
+<li><b>Querverlinkung zwischen übergeordneten Werken und ihren Teilen.</b><br /><br />
+Werden zu einem Sammelwerk (z.B. Jahrbuch, Sammelband) sowohl das Gesamtdokument als auch als die Einzelbeiträge auf res doctae publiziert, sollte zuerst das Gesamtdokument auf das Repository hochgeladen werden. Beim Publizieren der Einzelbeiträge sollten dann die persistente URL des Gesamtwerkes im Feld "ist Teil von" im Metadatenformular hinterlegt werden. Diese Angabe wird in der Anzeige der Teilpublikation als ein Link auf das Gesamtwerk angezeigt.<br />
+Die Verweise vom Gesamtwerk auf seine Teile werden - auf Grund der Teilverweise - vom System in regemäßigen Abständen automatich generiert.
+ <br />
+<span class="notes"></span></li>
+</ol>
+</div>
+<h2 id="specialmetadata">Erklärungen zu einzelnen Metadatenfeldern</h2>
+
+<div>
+
+<ol>
+<li><b>Formularfeld: Teil von - dc.relation.ispartof</b><br />
+Ist eine Publikation Teil einer anderen, so wird in dieses Feld die komplette URI des übergeordneten Titels eingetragen.<br/><br />
+<u>Nutzungsbeispiel</u>: byzantinische Rechtsquellen:<br />
+Titel (dc.title): Neue Zeugnisse der Digestensumme des Anonymus</br />
+Teil von (dc.relation.ispartof): http://hdl.handle.net/11858/00-001S-0000-0007-70D7-2<br/><br />
+<u>Listendarstellung</u>:<br />
+<b>Titel:</b> Neue Zeugnisse der Digestensumme des Anonymus<br />
+<b>In:</b> Fontes Minores 7</br/>
+
+
+<br />
+<span class="notes">Siehe auch "<a href="#metadatainfo">Allgemeine Regel beim Erfassen von Metadaten</a>"</span>
+ </li>
+<li><b>Formularfeld: Serie - dc.relation.ispartofseries</b><br />
+Ist eine Publikation (ein Buch, Sammelband etc.) als Teil einer Serie erschienen, wird der Serientitel und die Bandnummer in zwei getrennten Feldern eingetragen. Die Inhalte werden vom System zusammengefügt und durch Semikolon getrennt gespeichert. (Serienname; Bandnr.)<br/>
+Bei nachträglicher Korrektur von Metadaten müssen diese Daten händisch in dieser Form eingetragen werden.<br /><br />
+<u>Nutzungsbeispiel</u>:<br />
+Titel (dc.title): Fontes Minores 7<br />
+Serie (dc.relation.ispartofseries): Forschungen zur byzantinischen Rechtsgeschichte;14<br /><br /><br />
+<u>Listendarstellung</u>:<br />
+<b>Titel:</b> Fontes Minores 7<br />
+<b>Serie:</b> Forschungen zur byzantinischen Rechtsgeschichte;14</br/><br />
+
+
+ </li>
+<span class="notes"></span></li>
+<li><b>Formularfelder: Verlag - dc.publisher und Erscheinungsort - dc.publisher.place</b><br />
+Verlag und Erscheinungsort werden in getrennte Felder eingetragen. <br /><br />
+<u>Nutzungsbeispiel</u>:<br />
+Verlag (dc.publischer): Löwenklau-Verlag<br />
+Erscheinungsort (dc.publisher.place): Frankfurth a. Main<br /><br />
+<u>Listendarstellung</u>:<br />
+<b>Verlag:</b> Löwenklau-Verlag: Frankfurth a. Main<br /><br />
+
+<span class="notes"></span></li>
+
+<li><b>Formularfelder: Digitalisirungsvorlage - dc.relation.source und ISBN der ISBN der Digitaliserungsvorlage - dc.source.isbn</b><br />
+Handelt sich bei einer Publikation um ein Digitalisat, so kann im Feld Digitalisierungvorlage die bibl. Zitation bzw. im ensrp. ISBN-Feld die ISBN der Vorlage hinterlegt werden.<br /><br /> 
+<u>Nutzungsbeispiel (beide Felder vorhanden)</u>:<br />
+Digitalisierungsvorlage (dc.relation.source): Gottfried Wilhelm Leibniz: Sämtliche Schriften und Briefe. Herausgegeben von der Berlin-Brandenburgischen Akademie der Wissenschaften und der Akademie der Wissenschaften zu Göttingen. 2. Reihe, Philosophischer Briefwechsel, Band 2, 1686-1694, herausgegeben von der Leibniz-Forschungsstelle der Universität Münster. Berlin : Akademie Verlag, 2009<br />
+ISBN der Digitalisierungsvorlage (dc.source.isbn): 978-3-05-004257-2<br /><br />
+<u>Darstellung</u>:<br />
+<b>Digitaliisat von:</b> Gottfried Wilhelm Leibniz: Sämtliche Schriften und Briefe. Herausgegeben von der Berlin-Brandenburgischen Akademie der Wissenschaften und der Akademie der Wissenschaften zu Göttingen. 2. Reihe, Philosophischer Briefwechsel, Band 2, 1686-1694, herausgegeben von der Leibniz-Forschungsstelle der Universität Münster. Berlin : Akademie Verlag, 2009. ISBN 978-3-05-004257-2<br /><br />
+
+<span class="notes"></span></li>
+
+<li><b>Formularfeld: ISBN der Druckversion - dc.identifier.pISBN</b><br />
+Ist eine Publikation parallel zur Online-Ausgabe auch im Druck erschienen und hat die Druckversion eine ISBN, so soll die ISBN hier eingetragen werden. <br /><br />
+<u>Nutzungsbeispiel:</u><br />
+ISBN der Druckversion (dc.identifier.pISBN): 978-3-05-004257-2<br /><br />
+<u>Darstellung</u>:<br />
+<b>Druckversion:</b> ISBN 978-3-05-004257-2<br /><br />
+
+<span class="notes">Bitte nicht mit Digitalisierungsvorlage verwechseln!</span></li>
+
+
+<li><b>Formularfeld in Germania Sacra: GS Identifier</b><br />
+Es ist der Identifier der Publikation in der Personendatenbank der Germania Sacra gemeint. Wir hier ein ID eingetragen, so wird in der Anzeige automatisch ein entsr. Link zum Personenregister und zum Dokumentensich in der PersonenDB angezeigt.<br /><br />
+</li>
+
+
+</ol>
+</div>
+<div>
+<h2 id="form2dc">Zuordnung von Formular- und internen dc-Feldern</h2>
+<b>Titel</b> - dc.title<br />
+<b>Untertitel</b> - dc.title.alternative<br />
+<b>Autor</b> - dc.contributor.author<br />
+<b>Herausgeber</b> - dc.contributor.editor<br />
+<b>Sonstige Personen (z.B. Übersetzer, Bearbeiter)</b> - dc.contributor.other
+<b>Verleger</b> - dc.publisher<br />
+<b>Erscheinungsort</b> - dc.publisher.place<br />
+<b>Erscheinungsdatum</b> - dc.date.issued<br />
+<b>Sprache</b> - dc.language.iso<br />
+<b>Zusammenfassung</b> - dc.description.abstract<br />
+<b>Inhaltsverzeichnis</b> - dc.description.tableofcontent<br />
+<b>Seite (von - bis)</b> - dc.format.extent<br />
+<b>Umfang</b> - dc.format.extent<br />
+<b>PURL</b> - dc.identifier.purl<br />
+<b>URN</b> - dc.identifier.urn<br />
+<b>ISBN</b> - dc.identifier.isbn [unklar, ob print- oder e-Verion]<br />
+<b>eISBN</b> - dc.identifier.eISBN [ISBN der e-Version]<br />
+<b>pISBN</b> - dc.identifier.pISBN [ISBN der Druck-Version]<br />
+<b>ISBN der Digitalisierugsvorlage</b> - dc.source.isbn<br />
+<b>Enthalten in</b> - dc.relation.ispartof<br />
+<b>Enthält</b> - dc.relation.haspart [Wird automatisch eingetragen!!]<br />
+<b>Druckausgabe</b> - dc.relation.source<br />
+<b>Publikationstyp</b> - dc.type<br />
+<b>Schlüsselwörter</b> - dc.subject<br />
+<b>Klassifikation (DDC)</b> - dc.subject.ddc<br />
+<b>BK</b> - dc.subject.bk<br />
+<b>GOK</b> - dc.subject.gok<br />
+<b>Serie</b> - dc.relation.ispartofseries<br />
+<b>Seriennummer</b> - dc.relation.volume<br />
+<b>Rechte</b> - dc.rights.access<br />
+<b>Person oder Institution, die die Veröffentlichungsrechte besitzt.</b> - dc.rights.holder<br />
+<b>Anmerkungen</b> - dc.notes<br />
+<b>Technische Daten</b> - dc.notes.technical<br />
+</div>
+<br /><br />
+<a href="#content">nach oben </a>|<a href="resDoctaeDoku.html"> zur Startseite</a>
+</div>
+</body>
+</html>
+

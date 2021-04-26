@@ -1915,17 +1915,59 @@ public class SolrServiceImpl implements SearchService, IndexingService {
                             String displayedValue = transformDisplayedValue(context, facetField.getName(), facetValue.getName());
                             String field = transformFacetField(facetFieldConfig, facetField.getName(), true);
                             String authorityValue = transformAuthorityValue(context, facetField.getName(), facetValue.getName());
-                            String sortValue = transformSortValue(context, facetField.getName(), facetValue.getName());
-                            String filterValue = displayedValue;
-                            if (StringUtils.isNotBlank(authorityValue))
-                            {
-                                filterValue = authorityValue;
-                            }
-                            result.addFacetResult(
-                                    field,
-                                    new DiscoverResult.FacetResult(filterValue,
-                                            displayedValue, authorityValue,
-                                            sortValue, facetValue.getCount()));
+			    //patch
+			    	allauthorities = ContentServiceFactory.getInstance().getMetadataValueService().findAllAuthorities(context);
+				boolean uuidauth = false;
+				if (displayedValue.matches("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")) // if uuid displayedValue comes - happens only with authorities
+				{
+					if (field.equals("author")) //let dspace show some authors on the main page on the right as it is: unsorted, etc.
+					{ displayedValue = ContentServiceFactory.getInstance().getMetadataValueService().findByAuthority(context, displayedValue).getValue(); 
+					}
+				        else //and here we fill the container with the data dspace will list under browse by authors(authority)
+					{ 
+						uuidauth = true; 
+						AuthorityContainer acont = new AuthorityContainer(); 
+						acont.setAfield(field); 
+						acont.setAfilterValue(displayedValue); 
+						acont.setAdisplayedValue(displayedValue); 
+						acont.setAauthorityValue(authorityValue); 
+						acont.setAsortValue(displayedValue); 
+						acont.setAfacetValueCount(facetValue.getCount()); 
+						authorityContainer.add(acont); 
+					}
+				}
+				String sortValue = transformSortValue(context, facetField.getName(), facetValue.getName());
+
+				String filterValue = displayedValue;
+				if (StringUtils.isNotBlank(authorityValue))
+				{ 
+					filterValue = authorityValue; 
+				}	
+				if (uuidauth==false)//normal way, if the data is not authority
+				{ 
+					result.addFacetResult( field, new DiscoverResult.FacetResult(filterValue, displayedValue, authorityValue, sortValue, facetValue.getCount())); 
+				}
+
+				
+				if (authorityContainer.size()>0)//we have something in authority container
+				{	
+					String prevuuid = "";//allauthorities list may contain multiple rows to each authors, but we only need one, with the name
+								//we will iterate through the ordered list coming from metadatavalue service
+					for (int z = 0; z < allauthorities.size(); z++)
+					{
+						int indx = getIndex(authorityContainer,allauthorities.get(z).getAuthority());
+						//if we find the authority uuid in the list, we will add the whole pack to the FacetResult with repaired values
+						if (!allauthorities.get(z).getAuthority().equals(prevuuid) && indx>-1)
+						{ 
+							AuthorityContainer bcont = authorityContainer.get(indx); 
+							result.addFacetResult( bcont.getAfield(), 
+							new DiscoverResult.FacetResult(bcont.getAfilterValue(), allauthorities.get(z).getValue(), bcont.getAauthorityValue(), allauthorities.get(z).getValue(), bcont.getAfacetValueCount())); 
+						}
+
+						prevuuid = allauthorities.get(z).getAuthority();
+					}
+				}
+			    //
                         }
                     }
                 }
@@ -2348,7 +2390,7 @@ public class SolrServiceImpl implements SearchService, IndexingService {
             value = value.substring(1, value.length() -1);
         }
         return value;
-    }
+    	}
 
 	@Override
 	public void indexContent(Context context, DSpaceObject dso, boolean force,
@@ -2380,4 +2422,65 @@ public class SolrServiceImpl implements SearchService, IndexingService {
         // rely on special characters to separate the field from the query value)
         return ClientUtils.escapeQueryChars(query);
     }
+
+    protected class AuthorityContainer {
+
+	private String afield;
+	private String afilterValue;
+	private String adisplayedValue;
+	private String aauthorityValue;
+	private String asortValue;
+	private long afacetValueCount;
+
+	public String getAfield()
+	{ return afield; }
+
+	public void setAfield(String afield)
+	{ this.afield = afield; }
+
+	public String getAfilterValue()
+	{ return afilterValue; }
+
+	public void setAfilterValue(String afilterValue)
+	{ this.afilterValue = afilterValue; }
+
+	public String getAdisplayedValue()
+	{ return adisplayedValue; }
+
+	public void setAdisplayedValue(String adisplayedValue)
+	{ this.adisplayedValue = adisplayedValue; }
+
+	public String getAauthorityValue()
+	{ return aauthorityValue; }
+
+	public void setAauthorityValue(String aauthorityValue)
+	{ this.aauthorityValue = aauthorityValue; }
+
+	public String getAsortValue()
+	{ return asortValue; }
+
+	public void setAsortValue(String asortValue)
+	{ this.asortValue = asortValue; }
+
+	public long getAfacetValueCount()
+	{ return afacetValueCount; }
+
+	public void setAfacetValueCount(long afacetValueCount)
+	{ this.afacetValueCount = afacetValueCount; }
+
+     }
+
+   	private List<AuthorityContainer> authorityContainer = new ArrayList<AuthorityContainer>();
+	private List<MetadataValue> allauthorities; //list of all authority rows from metadavalue table 
+
+	public int getIndex(List<AuthorityContainer> ac, String uuid)
+	{
+		for (int i = 0; i < ac.size(); i++)
+		{	
+			if (ac.get(i).getAauthorityValue().equals(uuid))
+			{ return i; }
+
+		}
+		return -1;
+	}
 }

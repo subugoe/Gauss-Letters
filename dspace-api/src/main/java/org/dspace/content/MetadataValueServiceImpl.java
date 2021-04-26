@@ -120,4 +120,14 @@ public class MetadataValueServiceImpl implements MetadataValueService {
     public int countTotal(Context context) throws SQLException {
         return metadataValueDAO.countRows(context);
     }
+
+    //patch
+	@Override
+	public MetadataValue findByAuthority(Context context, String authorityID) throws SQLException
+	{ return metadataValueDAO.findByAuthority(context, authorityID); }
+
+	@Override
+	public List<MetadataValue> findAllAuthorities(Context context) throws SQLException
+	{ return metadataValueDAO.findAllAuthorities(context); }
+
 }

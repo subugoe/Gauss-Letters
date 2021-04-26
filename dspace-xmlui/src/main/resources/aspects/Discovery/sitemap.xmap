@@ -199,13 +199,13 @@ and the recent submissions listing
                         <map:match type="HandleTypeMatcher" pattern="community">
                             <map:transform type="SidebarFacetsTransformer"/>
                             <map:transform type="CommunitySearch"/>
-                            <map:transform type="CommunityRecentSubmissions"/>
+				    <!-- <map:transform type="CommunityRecentSubmissions"/> -->
                             <map:serialize type="xml"/>
                         </map:match>
                         <map:match type="HandleTypeMatcher" pattern="collection">
                             <map:transform type="SidebarFacetsTransformer"/>
                             <map:transform type="CollectionSearch"/>
-                            <map:transform type="CollectionRecentSubmissions"/>
+			    <map:transform type="CollectionRecentSubmissions"/>
                             <map:serialize type="xml"/>
                         </map:match>
                         <map:match type="HandleTypeMatcher" pattern="item">

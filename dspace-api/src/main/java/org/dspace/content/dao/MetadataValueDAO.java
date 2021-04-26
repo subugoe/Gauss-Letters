@@ -36,4 +36,9 @@ public interface MetadataValueDAO extends GenericDAO<MetadataValue> {
 
     int countRows(Context context) throws SQLException;
 
+    //patch
+    public MetadataValue findByAuthority(Context context, String authorityID) throws SQLException;
+
+    public List<MetadataValue> findAllAuthorities(Context context) throws SQLException;
+
 }

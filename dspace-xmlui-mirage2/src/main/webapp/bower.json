@@ -2,7 +2,7 @@
     "name": "mirage2",
     "version": "0.1.2",
     "dependencies": {
-        "bootstrap-sass-official": "3.3.0",
+        "bootstrap-sass-official": "3.3.7",
         "modernizr": "2.8.3",
         "jquery": "~1.10.2",
         "jquery-ui": "1.10.3",

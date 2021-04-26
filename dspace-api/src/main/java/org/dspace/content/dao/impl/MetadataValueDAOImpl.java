@@ -91,4 +91,24 @@ public class MetadataValueDAOImpl extends AbstractHibernateDAO<MetadataValue> im
         return count(createQuery(context, "SELECT count(*) FROM MetadataValue"));
     }
 
+    //patch
+        //patch
+        @Override
+        public List<MetadataValue> findAllAuthorities(Context context) throws SQLException
+        {
+                String queryString = "SELECT m FROM MetadataValue m WHERE m.authority is not null order by m.value";
+                Query query = createQuery(context, queryString);
+                return list(query);
+        }
+
+        @Override
+        public MetadataValue findByAuthority(Context context, String authorityID) throws SQLException
+        {
+                String queryString = "SELECT m FROM MetadataValue m WHERE m.authority = :authority";
+                Query query = createQuery(context, queryString);
+                query.setParameter("authority", authorityID);
+                query.setMaxResults(1);
+                return (MetadataValue) query.uniqueResult();
+        }
+
 }

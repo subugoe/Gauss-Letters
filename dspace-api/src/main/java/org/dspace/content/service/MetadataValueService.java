@@ -99,4 +99,10 @@ public interface MetadataValueService {
             throws SQLException;
 
     int countTotal(Context context) throws SQLException;
+
+    //patch
+        public MetadataValue findByAuthority(Context context, String authorityID) throws SQLException;
+
+        public List<MetadataValue> findAllAuthorities(Context context) throws SQLException;
+
 }

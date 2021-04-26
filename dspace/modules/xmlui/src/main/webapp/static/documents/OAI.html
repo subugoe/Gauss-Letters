@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>res doctae - OAI-PMH Schnittstlle</title>
+<style type="text/css">
+body {
+	padding: 0.5em 2em;
+}
+h1 {
+	font-size: 1.4em;
+	
+}
+h2 {
+	font-size: 1.2em;
+}
+.bold {
+	font-weight: bolder;
+}
+
+.notes {
+	color: #006400;
+}
+
+li {
+	padding: 0.3em 0;
+}
+
+.mark {
+	color: red;
+}
+</style>
+</head>
+<body>
+
+<div>
+<h1>res doctae - OAI-PMH (v.2.0) Schnittstlle </h1>
+<h2>Realisierung gemäß der DINI-Leitlinien für das DINI-Zertifikat 2010</h2>
+<h3>A.1 Protokollkonformität</h3>
+<div>
+<ol>
+<li>Mindestanforderungen erfüllt</li>
+<li>Empfehlungen</li>
+<ul>
+	<li class="mark">E.A.1-1: Wer testet regelmäßig die Schnittstelle?</li>
+	<li class="mark">E.A.1-2: Wer meldet Änderungen der Schnittstelle an die Service-Providern?</li>
+	<li>E.A.1-3: Kurze Beschreibung des Dienstes im "description"-Element von Identify noch liefern</li>
+	<li>E.A.1-4: Wird nich realisiert</li>
+	<li>E.A.1-5: Wird noch geprüft und ggf. realisiert</li>
+</ul>
+</ol>
+</div>
+<h3>A.2 Erweiterte Anforderungen</h3>
+<h3>A.2.1 Set für Open-Access-Dokumente (open_access) erfüllt</h3>
+<h3>A.2.2 Sets für DDC-Gruppen</h3>
+<div>
+<ul>
+<li>Mindestanforderungen erfüllt</li>
+</ul>
+</div>
+<h3>A.2.3 Sets für Dokument- und Publikationstypen</h3>
+<div>
+<ul>
+<li>Mindestanforderungen erfüllt</li>
+</ul>
+</div>
+<h3>A.2.4 Sets für Publikationsstatus (nur Empfehlung)</h3>
+<div>
+<ul>
+<li>Nicht erfüllt, Aufwand noch schätzen.</li>
+</ul>
+</div>
+<h3>A.2.5 Umgang mit gelöschten Sätzen</h3>
+<div>
+<ul>
+<li>Mindestanforderung (M.A.2-3) Deleting Strategy "persistent" realisiert</li>
+</ul>
+</div>
+<h3>A.2.6 Datenflusskontrolle</h3>
+<div>
+<ul>
+<li>Empfehlungen (keine Anforderungen)</li>
+<ul>
+<li>E.A.2-2: Harvest Batch Size: 100</li>
+<li>E.A.2-3: Lebensdauer von Resumption Token: 24 Stunden</li>
+<li>E.A.2-3: Attribute completeListSize wird <strong>nicht</strong> verwendet</li>
+</ul>
+</ul>
+</div>
+<h3>A.3 Metadaten-Anforderungen (Dublin Core Simple)</h3>
+<li>Mindestanforderungen</li>
+<ul>
+	<li>M.A.3-1: creator, title, date, type, identifier bei jedenm Record vorhanden. (Allerding kann "creator" gelegentlich durch "contributor" ersetzt werden)</li>
+	<li>M.A.3-2: erfüllt</strong></li>
+	<li>M.A.3-3: Identifier immer vorhanden, allerding <strong>nicht auf den Volltext. BaseURNs für operable URLs werden noch nachgetragen.</li>
+	<li>M.A.3-4: erfüllt</li>
+	<li>M.A.3-5: Wird noch realisiert</li>
+	<li>M.A.3-6: erfüllt</strong></li>
+	<li>M.A.3-7: erfüllt</li>
+	<li>M.A.3-8: erfüllt</li>
+</ul>
+<li>Empfehlungen</li>
+<ul>
+	<li>E.A.3-1: erfüllt</li>
+	<li>E.A.3-2: erfüllt</li>
+	<li>E.A.3-3: Genaue Citationsform für source wird noch geprüft und angepasst</li>
+	<li>E.A.3-4: erfüllt</li>
+	<li>E.A.3-5: erfüllt</li>
+</ul>
+
+</div>
+<h2>Fragen</h2>
+<div class="notes">
+<ul>
+	<li>Wer meldet die Schnittstelle bei den diversen Serviceprovidern an?</li>
+	<li>Für die Angabe der SubjectClassification gibt es scheinbar keine Forderungen. Wie kann der Harvester die Classification erkennen?</li>
+	<li>Wie geht man mit Untertiteln vor? Vorschlag nach dublincore.org: Titel; Untertitel im Titelfeld</li>
+</ul>
+</div>
+<div>
+<a href="http://rep.adw-goe.de/resDoctaeDoku.html">zurück zur Dokumentation</a>
+</div>
+
+</div>
+
+
+</body></html>
+
