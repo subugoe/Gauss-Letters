@@ -1,5 +1,9 @@
 
-# DSpace
+# [The complete correspondence of Carl Friedrich Gauß](https://gauss.adw-goe.de/)
+
+A Project of the Academy of Science & SUB Göttingen based on DSpace 5.10
+
+## DSpace
 
 [![Build Status](https://travis-ci.org/DSpace/DSpace.png?branch=master)](https://travis-ci.org/DSpace/DSpace)
 
